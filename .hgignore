@@ -1,0 +1,8 @@
+syntax: glob
+src/_ReSharper.MSTestContrib
+src/UITesting.Examples/SilverlightTodo.Web/ClientBin/SilverlightTodo.xap
+**.suo
+*/bin
+*/obj
+build/artifacts
+**.user

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Jake Ginnivan</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>MSTestContrib.UITesting.Silverlight helps you write maintainable and clean CodedUI tests</summary>
+    <description>$description$</description>
+    <language>en-US</language>
+    <projectUrl>http://mstestcontrib.codeplex.com</projectUrl>
+    <licenseUrl>http://mstestcontrib.codeplex.com/license</licenseUrl>
+    <tags>CodedUI CUIT UIAutomation Silverlight UITesting Automation</tags>
+    <dependencies>
+      <dependency id="MSTestContrib.UITesting" version="$version$" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="SL_UITesting_Readme.txt" target="content" />
+    <file src="CodedUITestBase.cs.pp" target="content" />
+    <file src="SilverlightAppTest.cs.pp" target="content" />
+    <file src="MainScreen.cs.pp" target="content/Screens" />
+  </files>
+</package>

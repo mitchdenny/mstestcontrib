@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>MSTestContrib</id>
+    <version>1.1.1</version>
+    <title>MSTestContrib.Specifications</title>
+    <authors>Mitch Denny</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>MSTestContrib augments the capabilities of the MSTest framework by adding a specification language.</summary>
+    <description>MSTestContrib augments the capabilities of the MSTest framework by adding a specification language.</description>
+    <language>en-US</language>
+    <projectUrl>http://mstestcontrib.codeplex.com</projectUrl>
+    <licenseUrl>http://mstestcontrib.codeplex.com/license</licenseUrl>
+  </metadata>
+  <files>
+    <file src="MSTestContrib.dll" target="lib/NET40" />
+    <file src="install.ps1" target="Tools" />
+  </files>
+</package>

@@ -1,0 +1,60 @@
+<Project DefaultTargets="NuGet" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\build\lib\</MSBuildCommunityTasksPath>
+    <Root>$(MSBuildProjectDirectory)\</Root>
+    <Version>0.0.0.1</Version>
+    <Version Condition="$(BUILD_NUMBER) != ''">$(BUILD_NUMBER)</Version>
+
+    <Configuration>Debug</Configuration>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <NuGet Include="$(Root)src\Dependencies\NuGet\NuGet.exe" />
+  </ItemGroup>
+
+  <Target Name="Cleanup">
+    <Error Condition="$(Root) == ''" Text="Root variable must be defined" />
+
+    <!-- Diagnostics -->
+    <Message Text="Diagnostics:"/>
+    <Message Text="Build Number:    $(Version)" />
+    <Message Text="Project root:    $(Root)" />
+    <Message Text="Drop path:       build\Artifacts" />
+
+    <!-- Clean up -->
+    <ItemGroup>
+      <FilesToDelete Include="$(Root)**\bin\**\*.*" Exclude="$(Root)**\bin\**\*.vshost.exe" />
+      <FilesToDelete Include="$(Root)**\obj\**\*.*" Exclude="$(Root)**\obj\**\*.vshost.exe" />
+    </ItemGroup>
+    <Delete Files="@(FilesToDelete)" />
+  </Target>
+
+  <Target Name="Version" DependsOnTargets="Cleanup">
+    <RemoveDir Directories="build\artifacts\" />
+    <RemoveDir Directories="build\temp\" />
+  </Target>
+
+  <Target Name="Compile" DependsOnTargets="Version">
+    <MSBuild Projects="$(Root)src\MSTestContrib.UITesting\MSTestContrib.UITesting.csproj"
+             Properties="Configuration=$(Configuration)" />
+    <MSBuild Projects="$(Root)src\MSTestContrib.UITesting.Silverlight\MSTestContrib.UITesting.Silverlight.csproj"
+             Properties="Configuration=$(Configuration)" />
+  </Target>
+
+  <Target Name="Test" DependsOnTargets="Compile">
+  </Target>
+
+  <Target Name="NuGet" DependsOnTargets="Test">
+    <MakeDir Directories="$(Root)build\artifacts" />
+    <MakeDir Directories="$(Root)build\temp\NuGet" />
+    <PropertyGroup>
+      <OutputDirectory>-OutputDirectory "$(Root)build\artifacts\\"</OutputDirectory>
+      <BasePath>-BasePath "$(Root)src\\"</BasePath>
+      <VersionArg>-Version $(Version)</VersionArg>
+      <ConfigProperty>-Prop Configuration=$(Configuration)</ConfigProperty>
+    </PropertyGroup>
+
+    <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting\MSTestContrib.UITesting.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
+    <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting.Silverlight\MSTestContrib.UITesting.Silverlight.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
+  </Target>
+</Project>

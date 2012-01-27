@@ -1,0 +1,42 @@
+﻿<Window x:Class="WpfTodo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wpf Todo List" Height="350" Width="525"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ViewModel="clr-namespace:WpfTodo.ViewModel"
+        mc:Ignorable="d" 
+        d:DataContext="{d:DesignInstance ViewModel:MainWindowViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Button AutomationProperties.AutomationId="AddTaskButton"
+                Content="New"
+                HorizontalAlignment="Right"
+                Command="{Binding AddTaskCommand}" />
+        
+        <ListBox ItemsSource="{Binding Tasks}"
+                        AutomationProperties.AutomationId="TasksList"
+                        Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Title}"
+                                   AutomationProperties.AutomationId="Title" />
+                            <Label Content=" (" />
+                            <Label Content="{Binding DueDate, StringFormat=d}"
+                                   AutomationProperties.AutomationId="DueDate" />
+                            <Label Content=")" />
+                        </StackPanel>
+                        <Label Content="{Binding Description}"
+                               AutomationProperties.AutomationId="Description" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

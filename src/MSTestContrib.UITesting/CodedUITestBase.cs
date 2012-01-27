@@ -1,0 +1,22 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace MSTestContrib.UITesting
+{
+    public abstract class CodedUITestBase<T> where T : ICodedUIApplication, new()
+    {
+        [TestInitialize]
+        public void Setup()
+        {
+            Application = new T();
+            Application.Start();
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            Application.Close();
+        }
+
+        protected T Application { get; private set; }
+    }
+}

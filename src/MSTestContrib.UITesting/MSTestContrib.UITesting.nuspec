@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$description$</title>
+    <authors>$author$</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>MSTestContrib.UITesting helps you write maintainable and clean CodedUI tests</summary>
+    <description>$description$</description>
+    <language>en-US</language>
+    <projectUrl>http://mstestcontrib.codeplex.com</projectUrl>
+    <licenseUrl>http://mstestcontrib.codeplex.com/license</licenseUrl>
+    <tags>CodedUI CUIT UIAutomation WPF UITesting Automation</tags>
+  </metadata>
+</package>
