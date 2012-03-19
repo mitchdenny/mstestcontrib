@@ -12,11 +12,5 @@
     <projectUrl>http://mstestcontrib.codeplex.com</projectUrl>
     <licenseUrl>http://mstestcontrib.codeplex.com/license</licenseUrl>
     <tags>CodedUI CUIT UIAutomation WPF UITesting Automation</tags>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="Microsoft.VisualStudio.TestTools.UITest.Common" targetFramework="net40" />
-      <frameworkAssembly assemblyName="Microsoft.VisualStudio.QualityTools.UnitTestFramework" targetFramework="net40" />
-      <frameworkAssembly assemblyName="Microsoft.VisualStudio.QualityTools.CodedUITestFramework" targetFramework="net40" />
-      <frameworkAssembly assemblyName="Microsoft.VisualStudio.TestTools.UITesting" targetFramework="net40" />
-    </frameworkAssemblies>
   </metadata>
 </package>
