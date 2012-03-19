@@ -1,12 +1,13 @@
 <Project DefaultTargets="NuGet" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\build\lib\</MSBuildCommunityTasksPath>
     <Root>$(MSBuildProjectDirectory)\</Root>
     <Version>0.0.0.1</Version>
     <Version Condition="$(BUILD_NUMBER) != ''">$(BUILD_NUMBER)</Version>
 
     <Configuration>Debug</Configuration>
   </PropertyGroup>
+
+  <Import Project="$(MSBuildProjectDirectory)\tools\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
 
   <ItemGroup>
     <NuGet Include="$(Root)src\Dependencies\NuGet\NuGet.exe" />
@@ -45,8 +46,14 @@
   </Target>
 
   <Target Name="NuGet" DependsOnTargets="Test">
+    <PropertyGroup>
+      <NuGetTemp>$(Root)build\temp\NuGet</NuGetTemp>
+    </PropertyGroup>
     <MakeDir Directories="$(Root)build\artifacts" />
-    <MakeDir Directories="$(Root)build\temp\NuGet" />
+    <MakeDir Directories="$(NuGetTemp)" />
+    <MakeDir Directories="$(NuGetTemp)\content" />
+    <MakeDir Directories="$(NuGetTemp)\content\Screens" />
+    <MakeDir Directories="$(NuGetTemp)\tools" />
     <PropertyGroup>
       <OutputDirectory>-OutputDirectory "$(Root)build\artifacts\\"</OutputDirectory>
       <BasePath>-BasePath "$(Root)src\\"</BasePath>
@@ -54,6 +61,26 @@
       <ConfigProperty>-Prop Configuration=$(Configuration)</ConfigProperty>
     </PropertyGroup>
 
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\MSTestContrib.UITesting.Quickstart.Wpf.nuspec"
+          DestinationFolder="$(NuGetTemp)" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Install.ps1"
+          DestinationFolder="$(NuGetTemp)\tools" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\ApplicationUnderTest.cs"
+          DestinationFolder="$(NuGetTemp)\content" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\CodedUITestBase.cs"
+          DestinationFolder="$(NuGetTemp)\content" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Screens\MainScreen.cs"
+          DestinationFolder="$(NuGetTemp)\content\Screens" />
+
+    <ItemGroup>
+      <FilesToUpdate Include="$(NuGetTemp)\content\**\*.cs" />
+    </ItemGroup>
+    
+    <FileUpdate Files="@(FilesToUpdate)"
+                Regex="MSTestContrib.UITesting.Quickstart.Wpf"
+                ReplacementText="$rootnamespace$"/>
+
+    <Exec Command='"@(NuGet)" pack "$(NuGetTemp)\MSTestContrib.UITesting.Quickstart.Wpf.nuspec" -BasePath "$(NuGetTemp)" $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
     <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting\MSTestContrib.UITesting.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
     <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting.Silverlight\MSTestContrib.UITesting.Silverlight.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
   </Target>

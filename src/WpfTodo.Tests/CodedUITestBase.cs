@@ -3,7 +3,7 @@ using WpfTodo.Tests.Screens;
 
 namespace WpfTodo.Tests
 {
-    public class CodedUITestBase : CodedUITestBase<TodoApp>
+    public class CodedUiTestBase : CodedUITestBase<TodoApp>
     {
         protected MainScreen MainScreen()
         {

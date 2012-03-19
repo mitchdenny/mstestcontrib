@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MSTestContrib.UITesting.Quickstart.Wpf</id>
+    <version>$version$</version>
+    <title>MSTestContrib.UITesting.Quickstart.Wpf</title>
+    <authors>Jake Ginnivan</authors>
+    <owners>Jake Ginnivan</owners>
+    <projectUrl>http://mstestcontrib.codeplex.com</projectUrl>
+    <licenseUrl>http://mstestcontrib.codeplex.com/license</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Sets your project up with Guidance and the structure that will have you using UITesting Contrib quickly and easily</description>
+    <copyright>Copyright Jake Ginnivan 2012</copyright>
+    <tags>CodedUI CUIT UIAutomation WPF UITesting Automation Quickstart</tags>
+    <dependencies>
+      <dependency id="MSTestContrib.UITesting" />
+    </dependencies>
+  </metadata>
+</package>

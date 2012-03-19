@@ -1,25 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BE7FE417-20F1-44AA-B579-51834E13DF98}</ProjectGuid>
+    <ProjectGuid>{0D2A25CC-4598-45E0-BE10-D14D1F2EEE00}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MSTestContrib.UITesting</RootNamespace>
-    <AssemblyName>MSTestContrib.UITesting</AssemblyName>
+    <RootNamespace>MSTestContrib.UITesting.Quickstart.Wpf</RootNamespace>
+    <AssemblyName>MSTestContrib.UITesting.Quickstart.Wpf</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,39 +30,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="WindowsBase" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationUnderTest.cs" />
     <Compile Include="CodedUITestBase.cs" />
-    <Compile Include="Helpers\Retry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ICodedUIApplication.cs" />
-    <Compile Include="Wpf\Extensions\WpfButtonExtensions.cs" />
-    <Compile Include="Wpf\WpfApplicationBase.cs" />
-    <Compile Include="Wpf\Extensions\WpfComboBoxExtensions.cs" />
-    <Compile Include="Wpf\Extensions\WpfControlExtensions.cs" />
-    <Compile Include="Wpf\Extensions\WpfEditExtensions.cs" />
-    <Compile Include="Wpf\WpfScreen.cs" />
-    <Compile Include="Wpf\Extensions\WpfWindowExtensions.cs" />
+    <Compile Include="Screens\MainScreen.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MSTestContrib.UITesting.nuspec">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="Install.ps1" />
+    <None Include="MSTestContrib.UITesting.Quickstart.Wpf.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MSTestContrib.UITesting\MSTestContrib.UITesting.csproj">
+      <Project>{BE7FE417-20F1-44AA-B579-51834E13DF98}</Project>
+      <Name>MSTestContrib.UITesting</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
-  </Target>  
+  </Target>
   <Target Name="AfterBuild">
   </Target>
   -->
