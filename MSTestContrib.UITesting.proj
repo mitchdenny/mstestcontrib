@@ -83,7 +83,7 @@
                 ReplacementText="$rootnamespace$"/>
 
     <Exec Command='"@(NuGet)" pack "$(NuGetTemp)\MSTestContrib.UITesting.Quickstart.Wpf.nuspec" -BasePath "$(NuGetTemp)" $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
-    <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting\MSTestContrib.UITesting.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
+    <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting\MSTestContrib.UITesting.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg) -Symbols' />
     <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting.Silverlight\MSTestContrib.UITesting.Silverlight.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
   </Target>
 </Project>

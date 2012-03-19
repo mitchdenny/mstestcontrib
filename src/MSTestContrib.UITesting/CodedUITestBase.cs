@@ -14,7 +14,8 @@ namespace MSTestContrib.UITesting
         [TestCleanup]
         public void TestCleanup()
         {
-            Application.Close();
+            if (Application != null)
+                Application.Close();
         }
 
         protected T Application { get; private set; }
