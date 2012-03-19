@@ -6,3 +6,4 @@ src/UITesting.Examples/SilverlightTodo.Web/ClientBin/SilverlightTodo.xap
 */obj
 build/artifacts
 **.user
+src/UITesting.Examples/SilverlightTodo/Bin
