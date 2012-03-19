@@ -1,6 +1,7 @@
-﻿using MSTestContrib.UITesting.Quickstart.Wpf.Screens;
+﻿using MSTestContrib.UITesting;
+using Quickstart.Wpf.Screens;
 
-namespace MSTestContrib.UITesting.Quickstart.Wpf
+namespace Quickstart.Wpf
 {
     public class CodedUiTestBase : CodedUITestBase<ApplicationUnderTest>
     {

@@ -1,7 +1,7 @@
 ﻿using MSTestContrib.UITesting.Wpf;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
-namespace MSTestContrib.UITesting.Quickstart.Wpf.Screens
+namespace Quickstart.Wpf.Screens
 {
     /// <summary>
     /// Contains methods and properties which interact with the MainWindow of your application.

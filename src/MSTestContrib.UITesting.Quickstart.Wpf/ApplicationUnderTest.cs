@@ -4,7 +4,7 @@ using MSTestContrib.UITesting.Wpf;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
-namespace MSTestContrib.UITesting.Quickstart.Wpf
+namespace Quickstart.Wpf
 {
     /// <summary>
     /// This class contains all the information and logic required to start your application and get hold of the main window

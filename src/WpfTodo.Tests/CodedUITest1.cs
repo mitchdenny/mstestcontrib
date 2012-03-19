@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace WpfTodo.Tests
 {
     [CodedUITest]
-    public class CanAddTaskTest : CodedUITestBase
+    public class CanAddTaskTest : CodedUiTestBase
     {
         [TestMethod]
         public void CodedUITestMethod1()

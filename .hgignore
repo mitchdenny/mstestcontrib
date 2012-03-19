@@ -8,3 +8,4 @@ build/artifacts
 **.user
 src/UITesting.Examples/SilverlightTodo/Bin
 build
+src/TestResults

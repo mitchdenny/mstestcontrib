@@ -65,6 +65,8 @@
           DestinationFolder="$(NuGetTemp)" />
     <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Install.ps1"
           DestinationFolder="$(NuGetTemp)\tools" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\ExampleTest.cs"
+          DestinationFiles="$(NuGetTemp)\content\ExampleTest.cs.pp" />
     <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\ApplicationUnderTest.cs"
           DestinationFiles="$(NuGetTemp)\content\ApplicationUnderTest.cs.pp" />
     <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\CodedUITestBase.cs"
@@ -77,7 +79,7 @@
     </ItemGroup>
     
     <FileUpdate Files="@(FilesToUpdate)"
-                Regex="MSTestContrib.UITesting.Quickstart.Wpf"
+                Regex="Quickstart.Wpf"
                 ReplacementText="$rootnamespace$"/>
 
     <Exec Command='"@(NuGet)" pack "$(NuGetTemp)\MSTestContrib.UITesting.Quickstart.Wpf.nuspec" -BasePath "$(NuGetTemp)" $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
