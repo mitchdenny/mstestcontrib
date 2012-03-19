@@ -66,14 +66,14 @@
     <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Install.ps1"
           DestinationFolder="$(NuGetTemp)\tools" />
     <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\ApplicationUnderTest.cs"
-          DestinationFolder="$(NuGetTemp)\content" />
+          DestinationFiles="$(NuGetTemp)\content\ApplicationUnderTest.cs.pp" />
     <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\CodedUITestBase.cs"
-          DestinationFolder="$(NuGetTemp)\content" />
+          DestinationFiles="$(NuGetTemp)\content\CodedUITestBase.cs.pp" />
     <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Screens\MainScreen.cs"
-          DestinationFolder="$(NuGetTemp)\content\Screens" />
+          DestinationFiles="$(NuGetTemp)\content\Screens\MainScreen.cs.pp" />
 
     <ItemGroup>
-      <FilesToUpdate Include="$(NuGetTemp)\content\**\*.cs" />
+      <FilesToUpdate Include="$(NuGetTemp)\content\**\*.cs.pp" />
     </ItemGroup>
     
     <FileUpdate Files="@(FilesToUpdate)"
