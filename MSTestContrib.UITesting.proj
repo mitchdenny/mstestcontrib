@@ -134,6 +134,10 @@
                 Regex="Quickstart.Wpf"
                 ReplacementText="$rootnamespace$"/>
     
+    <FileUpdate Files="@(FilesToUpdate)"
+                Regex="MSTestContrib.UITesting"
+                ReplacementText="$rootnamespace$.Infrastructure"/>
+    
     <Exec Command='"@(NuGet)" pack "$(QuickstartTemp)\MSTestContrib.UITesting.Quickstart.Wpf.nuspec" -BasePath "$(QuickstartTemp)" $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
   </Target>
 </Project>

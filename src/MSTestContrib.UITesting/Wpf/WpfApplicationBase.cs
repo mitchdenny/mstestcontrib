@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 
 namespace MSTestContrib.UITesting.Wpf
@@ -13,7 +12,7 @@ namespace MSTestContrib.UITesting.Wpf
             {
                 Trace.WriteLine(string.Format("Starting Application {0}", ApplicationExeLocation));
 
-                Application = ApplicationUnderTest.Launch(ApplicationExeLocation);
+                Application = Microsoft.VisualStudio.TestTools.UITesting.ApplicationUnderTest.Launch(ApplicationExeLocation);
                 Application.TechnologyName = "UIA";
 
                 MainWindow = GetMainWindow();
@@ -33,7 +32,7 @@ namespace MSTestContrib.UITesting.Wpf
 
         public WpfWindow MainWindow { get; private set; }
 
-        public ApplicationUnderTest Application { get; private set; }
+        public Microsoft.VisualStudio.TestTools.UITesting.ApplicationUnderTest Application { get; private set; }
 
         public virtual void Close()
         {
