@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <id>$id$</id>
+    <id>MSTestContrib.UITesting</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
+    <title>MSTestContrib.UITesting</title>
+    <authors>Jake Ginnivan</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>MSTestContrib.UITesting helps you write maintainable and clean CodedUI tests</summary>
-    <description>$description$</description>
+    <description>
+      MSTestContrib.UITesting encourgages you to write your CodedUI tests in a particular way which has been proven in production to allow a large test suite to be maintained with minimal effort
+    </description>
     <language>en-US</language>
     <projectUrl>http://mstestcontrib.codeplex.com</projectUrl>
     <licenseUrl>http://mstestcontrib.codeplex.com/license</licenseUrl>

@@ -45,45 +45,95 @@
   <Target Name="Test" DependsOnTargets="Compile">
   </Target>
 
+  <PropertyGroup>
+    <OutputDirectory>-OutputDirectory "$(Root)build\artifacts\\"</OutputDirectory>
+    <VersionArg>-Version $(Version)</VersionArg>
+    <ConfigProperty>-Prop Configuration=$(Configuration)</ConfigProperty>
+  </PropertyGroup>
+
   <Target Name="NuGet" DependsOnTargets="Test">
+    <CallTarget Targets="BuildNuGet;BuildQuickstartNuGet" />
+
+    <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting.Silverlight\MSTestContrib.UITesting.Silverlight.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
+  </Target>
+
+  <Target Name="BuildNuGet">
     <PropertyGroup>
-      <NuGetTemp>$(Root)build\temp\NuGet</NuGetTemp>
+      <NuGetTemp>$(Root)build\temp\UITestingNugetTemp</NuGetTemp>
     </PropertyGroup>
     <MakeDir Directories="$(Root)build\artifacts" />
     <MakeDir Directories="$(NuGetTemp)" />
-    <MakeDir Directories="$(NuGetTemp)\content" />
-    <MakeDir Directories="$(NuGetTemp)\content\Screens" />
-    <MakeDir Directories="$(NuGetTemp)\tools" />
-    <PropertyGroup>
-      <OutputDirectory>-OutputDirectory "$(Root)build\artifacts\\"</OutputDirectory>
-      <BasePath>-BasePath "$(Root)src\\"</BasePath>
-      <VersionArg>-Version $(Version)</VersionArg>
-      <ConfigProperty>-Prop Configuration=$(Configuration)</ConfigProperty>
-    </PropertyGroup>
+    <MakeDir Directories="$(NuGetTemp)\content\Infrastructure" />
+    <MakeDir Directories="$(NuGetTemp)\content\Infrastructure\Helpers" />
+    <MakeDir Directories="$(NuGetTemp)\content\Infrastructure\Wpf" />
 
-    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\MSTestContrib.UITesting.Quickstart.Wpf.nuspec"
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\MSTestContrib.UITesting.nuspec"
           DestinationFolder="$(NuGetTemp)" />
-    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Install.ps1"
-          DestinationFolder="$(NuGetTemp)\tools" />
-    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\ExampleTest.cs"
-          DestinationFiles="$(NuGetTemp)\content\ExampleTest.cs.pp" />
-    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\ApplicationUnderTest.cs"
-          DestinationFiles="$(NuGetTemp)\content\ApplicationUnderTest.cs.pp" />
-    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\CodedUITestBase.cs"
-          DestinationFiles="$(NuGetTemp)\content\CodedUITestBase.cs.pp" />
-    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Screens\MainScreen.cs"
-          DestinationFiles="$(NuGetTemp)\content\Screens\MainScreen.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\CodedUITestBase.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\CodedUITestBase.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\ICodedUIApplication.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\ICodedUIApplication.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\Helpers\Retry.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\Helpers\Retry.cs.pp" />
+    
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\Wpf\WpfScreen.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\Wpf\WpfScreen.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\Wpf\WpfApplicationBase.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\Wpf\WpfApplicationBase.cs.pp" />
+    
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\Wpf\Extensions\WpfButtonExtensions.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\Wpf\Extensions\WpfButtonExtensions.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\Wpf\Extensions\WpfComboBoxExtensions.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\Wpf\Extensions\WpfComboBoxExtensions.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\Wpf\Extensions\WpfControlExtensions.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\Wpf\Extensions\WpfControlExtensions.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\Wpf\Extensions\WpfEditExtensions.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\Wpf\Extensions\WpfEditExtensions.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting\Wpf\Extensions\WpfWindowExtensions.cs"
+          DestinationFiles="$(NuGetTemp)\content\Infrastructure\Wpf\Extensions\WpfWindowExtensions.cs.pp" />
 
     <ItemGroup>
       <FilesToUpdate Include="$(NuGetTemp)\content\**\*.cs.pp" />
+    </ItemGroup>
+
+    <FileUpdate Files="@(FilesToUpdate)"
+                Regex="MSTestContrib.UITesting"
+                ReplacementText="$rootnamespace$\Infrastructure"/>
+    
+    <Exec Command='"@(NuGet)" pack "$(NuGetTemp)\MSTestContrib.UITesting.nuspec" -BasePath "$(NuGetTemp)" $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
+  </Target>
+
+  <Target Name="BuildQuickstartNuGet">
+    <PropertyGroup>
+      <QuickstartTemp>$(Root)build\temp\QuickstartTemp</QuickstartTemp>
+    </PropertyGroup>
+    <MakeDir Directories="$(Root)build\artifacts" />
+    <MakeDir Directories="$(QuickstartTemp)" />
+    <MakeDir Directories="$(QuickstartTemp)\content" />
+    <MakeDir Directories="$(QuickstartTemp)\content\Screens" />
+    <MakeDir Directories="$(QuickstartTemp)\tools" />
+    
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\MSTestContrib.UITesting.Quickstart.Wpf.nuspec"
+          DestinationFolder="$(QuickstartTemp)" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Install.ps1"
+          DestinationFolder="$(QuickstartTemp)\tools" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\ExampleTest.cs"
+          DestinationFiles="$(QuickstartTemp)\content\ExampleTest.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\ApplicationUnderTest.cs"
+          DestinationFiles="$(QuickstartTemp)\content\ApplicationUnderTest.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\CodedUITestBase.cs"
+          DestinationFiles="$(QuickstartTemp)\content\CodedUITestBase.cs.pp" />
+    <Copy SourceFiles="$(Root)src\MSTestContrib.UITesting.Quickstart.Wpf\Screens\MainScreen.cs"
+          DestinationFiles="$(QuickstartTemp)\content\Screens\MainScreen.cs.pp" />
+ 
+    <ItemGroup>
+      <FilesToUpdate Include="$(QuickstartTemp)\content\**\*.cs.pp" />
     </ItemGroup>
     
     <FileUpdate Files="@(FilesToUpdate)"
                 Regex="Quickstart.Wpf"
                 ReplacementText="$rootnamespace$"/>
-
-    <Exec Command='"@(NuGet)" pack "$(NuGetTemp)\MSTestContrib.UITesting.Quickstart.Wpf.nuspec" -BasePath "$(NuGetTemp)" $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
-    <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting\MSTestContrib.UITesting.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg) -Symbols' />
-    <Exec Command='"@(NuGet)" pack "$(Root)src\MSTestContrib.UITesting.Silverlight\MSTestContrib.UITesting.Silverlight.csproj" $(BasePath) $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
+    
+    <Exec Command='"@(NuGet)" pack "$(QuickstartTemp)\MSTestContrib.UITesting.Quickstart.Wpf.nuspec" -BasePath "$(QuickstartTemp)" $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
   </Target>
 </Project>
