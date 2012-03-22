@@ -98,7 +98,7 @@
 
     <FileUpdate Files="@(FilesToUpdate)"
                 Regex="MSTestContrib.UITesting"
-                ReplacementText="$rootnamespace$\Infrastructure"/>
+                ReplacementText="$rootnamespace$.Infrastructure"/>
     
     <Exec Command='"@(NuGet)" pack "$(NuGetTemp)\MSTestContrib.UITesting.nuspec" -BasePath "$(NuGetTemp)" $(OutputDirectory) $(ConfigProperty) $(VersionArg)' />
   </Target>
